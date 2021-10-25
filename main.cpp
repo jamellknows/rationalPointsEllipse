@@ -84,9 +84,12 @@ void curve(double a, double b)
     vector <double> y2; 
     vector <double> y;
     vector <double> x;
+    double start;
     double step = 0.1; //will be precions
     double stoppingValue;
-    cout << "To what value of x would you want to find the rational points to ?\n This is a double (0.0)" <<endl;
+    cout << "What is the starting value of x (double 0.0)/ STARTING RANGE" << endl;
+    cin >> start;
+    cout << "To what value of x would you want to find the rational points to ?\n This is a double (0.0)/ ENDING RANGE" <<endl;
     cin >> stoppingValue;
 
     for(double x_run = 0.0; x_run < stoppingValue; x_run+=step)
@@ -100,11 +103,7 @@ void curve(double a, double b)
         // cout << "The value of y is " << y_run << endl;
         // cout << "For the value of x " << x_run << endl;
     }
-    cout << "output of y vector" <<endl;
-    for(int i =0; i < y.size(); i++)
-    {
-        cout << y[i] <<endl;
-    }
+   
 
 
     for(int i = 0; i < y.size(); i++)
@@ -117,7 +116,8 @@ void curve(double a, double b)
         cout << "y converted is " << convertedY << endl;
         cout << "length of y point " << lengthY << endl;
         cout << "the final prime to test to is " << finalPrimeY <<endl;
-        for(int k = 0; k < (convertedY / 2); k ++)
+
+        for(int k = 0; k < (convertedY / 2); k++)
         {  
             if(convertedY % primes(convertedY, k) == 0){
                 cout << "\n\nRATIONAL POINT!!!\n";

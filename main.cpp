@@ -9,21 +9,40 @@ using namespace std;
 int primes();
 int conversion();
 void curve();
+void rational();
 
 
-int conversion(double number) //This function converts decimals to integers
+
+int conversion(long double number) //This function converts decimals to integers
 {
     string stringDouble = to_string(number);
+    cout << "As a string: " << stringDouble << endl; 
+    int decimal = stringDouble.find(".");
     int length = stringDouble.length();
-    int wholeNumber =  number * pow(10, length);
+    length = length - decimal;
+    int exponent = pow(10, length);
+    int wholeNumber =  number * exponent;
+    //remove unnnecessary 0's
+
+    //coversion issues
 
     return wholeNumber;
 
 }
 
-int fPrime(int number) //This function calculates finalPrime
+void rational(double number2)
+{
+   int numberTest = conversion(number2);
+   int primeTest = conversion(M_PI);
+   cout << "PI converted too: " << primeTest <<endl;
+   int test = numberTest % primeTest;
+   cout << "The test results were: " << test << endl;
+
+}
+
+int fPrime(int number3) //This function calculates finalPrime
 {   
-    string stringDouble = to_string(number);
+    string stringDouble = to_string(number3);
     int length = stringDouble.length();
     char firstchar = stringDouble[0];
     int  firstNum = atoi(&firstchar);
@@ -79,11 +98,9 @@ int primes(int testLength, int primechoice){
 void curve(double a, double b)
 {   
     // cout << "To what precision do you want to plot the curve? integer value " << endl;
-    // int precision; 
-    // cin >> precision;
-    vector <double> y2; 
-    vector <double> y;
-    vector <double> x;
+    vector <long double> y2; 
+    vector <long double> y;
+    vector <long double> x;
     double start;
     double step = 0.1; //will be precions
     double stoppingValue;
@@ -94,8 +111,8 @@ void curve(double a, double b)
 
     for(double x_run = 0.0; x_run < stoppingValue; x_run+=step)
     {
-        double y2_run =  pow(x_run, 3) + a * x_run + b;
-        double y_run = sqrt(y2_run);
+       long double y2_run =  pow(x_run, 3) + a * x_run + b;
+       long double y_run = sqrt(y2_run);
         y.push_back(y_run);
         y2.push_back(y2_run);
         x.push_back(x_run);
@@ -110,18 +127,19 @@ void curve(double a, double b)
     {
         int convertedY = conversion(y[i]);
         int lengthY = lengthOf(convertedY);
-        int finalPrimeY = fPrime(convertedY);
+        int finalPrimeY = fPrime(convertedY/30);
         int k;
         cout << "y is " << y[i] <<endl;
-        cout << "y converted is " << convertedY << endl;
-        cout << "length of y point " << lengthY << endl;
-        cout << "the final prime to test to is " << finalPrimeY <<endl;
+        cout << "The length of the y value is " << lengthY << endl;
+        cout << "y converted to an equivalent whole number " << convertedY << endl;
+        cout << "Therefore the final prime to test too is " << finalPrimeY <<endl;
 
-        for(int k = 0; k < (convertedY / 2); k++)
+        for(int k = 0; k < 2; k++)
         {  
-            if(convertedY % primes(convertedY, k) == 0){
+            cout << "loop";
+            if(convertedY % primes(finalPrimeY, k) == 0){
                 cout << "\n\nRATIONAL POINT!!!\n";
-                cout << "The point y is : " << y[i] <<endl;
+                cout << "The point y is :" << y[i] <<endl;
                 cout << "The point x is :" << x[i] <<endl;
             
             }
@@ -132,6 +150,7 @@ void curve(double a, double b)
 
         
     }
+
 
 
 
